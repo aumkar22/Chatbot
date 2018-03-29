@@ -21,16 +21,16 @@ In the command line, go to the path where the repository is cloned and access th
 2. In the Advanced tab, click the 'Environment Variables' button
 3. Edit Path and add the path till the 'notebook' folder of the repository and click OK.
 ```
-For Python version 3.x 'tables' module needs to be installed. This can be done as:
+For Python version 3.x 'tables' and 'pytables' modules needs to be installed. This can be done as:
 
 ```
 conda install tables 
 
 ```
-or 
+and 
 
 ```
-pip install tables
+conda install -c conda-forge pytables
 
 ```
 
