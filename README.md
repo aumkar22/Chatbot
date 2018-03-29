@@ -51,7 +51,7 @@ Currently there are two possible queries one might try. The first is to find the
 In detecting the type of query a small set of regular expressions is used. These expressions determine if the users wants to know an artist name or a song tile by looking at the structure of the sentence. The WH-question word and some keywords are taken into account to achieve this. The chatbot assumes the query is entered in proper english. When an expression is matched the string is pruned to only contain song or artist name, which allows it for cheap lookup in the database. This is necessary since iterating over all 10.000 songs once already takes a significant amount of time. 
 
 ## Query Examples
-![alt text](https://imgur.com/kxb4SK0)
+![alt text](https://imgur.com/a/Ra1I9)
 ## Future Improvements
 
 Ideally the Chatbot accesses the full Million Songs Database so it can answer as many queries as possible. The current available resources do not allow this to be done in a reasonable amount of time. With resources like external storage or a better GPU we will be able to provide more and more accurate answers. 
