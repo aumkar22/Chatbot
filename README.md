@@ -32,4 +32,4 @@ python main.py
 
 The goal of the chatbot is to do basic interactions and answer some of the basic questions asked, for example, 'Who is the artist of the song Immigrant Song?'
 
-The Chatbot works by searching 
+The Chatbot works by extracting a query from the input question using regular expressions. The query is then compared to one attribute of every file in the database, depending on the question. In the example 'Who is the artist of the song Immigrant Song?' the Chatbot will compare the substring 'Immigrant Song' to the song title for every file. When a match is found, the artist's name is returned and output 
