@@ -7,11 +7,6 @@
 import nltk
 import time
 import re
-import os
-import sys
-import time
-import glob
-import numpy as np
 import settings
 
 
@@ -20,22 +15,6 @@ import settings
 
 h5 = settings.apply_to_all_files()
 
-
-# In[ ]:
-
-
-ROOT_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".."))
-DATA_DIR = os.path.join(ROOT_DIR, 'data')
-ADD_DATA_DIR = os.path.join(ROOT_DIR, 'AdditionalFiles')
-SUBSET_FILE = os.path.join(ADD_DATA_DIR, 'subset_msd_summary_file.h5')
-MSD_CODE_PATH = os.path.join(ROOT_DIR, 'MSongsDB')
-sys.path.append(os.path.join(MSD_CODE_PATH, 'PythonSrc'))
-
-
-# In[ ]:
-
-
-import hdf5_getters as GETTERS
 
 
 # In[2]:
@@ -85,10 +64,14 @@ def findSongToArtistQuery(taggedStr):
 #         print(taggedStr[found.span()[1]:])
         a = re.sub(r'([^\w\s]|[A-Z])', '',taggedStr[found.span()[1]:]).lstrip().rstrip()
         for i in range(len(h5)):
-            if GETTERS.get_artist_name(h5[i]) is a:
+            f = settings.GETTERS.open_h5_file_read(h5[i])
+            if settings.GETTERS.get_artist_name(f) is a:
                 print("Artist found!")
                 return True
+                f.close()
+                break
             else:
+                f.close()
                 print("Artist not found")
                 return False
     else:
