@@ -55,7 +55,7 @@ Examples of working queries:
 ![Working Example](https://github.com/aumkar22/Chatbot/blob/master/notebooks/Chatbot_example.PNG)
 
 Examples where the RiffGetter fails:
-![Fail Image](https://github.com/aumkar22/Chatbot/blob/master/notebooks/CB_fail_Image.png)
+![Fail Image](https://github.com/aumkar22/Chatbot/blob/master/notebooks/CB_fail_Image.PNG)
 ## Future Improvements
 
 Ideally the Chatbot accesses the full Million Songs Database so it can answer as many queries as possible. The current available resources do not allow this to be done in a reasonable amount of time. With resources like external storage or a better GPU we will be able to provide more and more accurate answers. 
