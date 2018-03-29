@@ -35,9 +35,12 @@ def apply_to_all_files(ext='.h5'):
         # count files
         cnt += len(files)
         # apply function to all files
-        h5 = []
-        for f in files :
-            h5.append(GETTERS.open_h5_file_read(f))
+        if cnt == 1000:
+            break
+        else:
+            h5 = []
+            for f in files :
+                h5.append(f)
         
     return h5
 
