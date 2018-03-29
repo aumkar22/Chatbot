@@ -37,17 +37,17 @@ def nerTagSentence(tagList):
 
 def findSongToArtistQuery(taggedStr):
     #Regex for finding artist of a song
-    exStA = re.compile('((who.*)?((sang|made|sings)|(is.*(artist|singer|band).*(of|from))|                     ((what|which).*)?(artist|SINGER|band) ?(sang|made|of)?))')
+    exStA = re.compile('((who.*)?((sang|made|sings)|(is.*(artist|singer|band).*(of|from|for))|                     ((what|which).*)?(artist|SINGER|band) ?(sang|made|of)?))')
     #Regex for finding songs of an artist
-    exAtS = re.compile('((what.*)?((song)s?.*?of.*?)|((song)s?.*?(did)))')
+    exAtS = re.compile('(((what.*)|(which.*))?((song)s?.*?of.*?)|((song)s?.*?(did)))')
     foundStA = re.search(exStA, taggedStr)
     foundAtS = re.search(exAtS, taggedStr)
     if foundStA is not None:
         a = re.sub(r'([^\w\s]|[A-Z])', '',taggedStr[found.span()[1]:]).lstrip().rstrip()
         for i in range(len(h5)):
             f = settings.GETTERS.open_h5_file_read(h5[i])
-            if settings.GETTERS.get_artist_name(f) is a:
-                print("Artist found!")
+            if settings.GETTERS.get_title(f) is a:
+                print("The artist you are looking for is: ", settings.GETTERS.get_song_name(f))
                 return True
                 f.close()
                 break
@@ -59,8 +59,8 @@ def findSongToArtistQuery(taggedStr):
         s = re.sub(r'((did|write|sing|make)|[^\w\s]|[A-Z])', '',taggedStr[foundAtS.span()[1]:]).lstrip().rstrip()
         for i in range(len(h5)):
             f = settings.GETTERS.open_h5_file_read(h5[i])
-            if settings.GETTERS.get_title(f) is s:
-                print("Song found!")
+            if settings.GETTERS.get_artist_name(f) is s:
+                print("One of their songs is: ", settings.GETTERS.get_title(f))
                 return True
                 f.close()
                 break
@@ -71,7 +71,6 @@ def findSongToArtistQuery(taggedStr):
     else:
         print("Query not understood")
         return False
-    
 
 
 # In[ ]:
@@ -89,7 +88,7 @@ def findSongToArtistQuery(taggedStr):
 
 #Hi and Hello are currently recognised as NNP's
 def initialiseChat():
-    print("Hi, I am **name**. You can ask anything that has to do with music!")
+    print("Welcome to the ***name*** chatbot. You can ask your music related questions here. Try starting off by saying hello!")
     time.sleep(.3)
     inStr = posTagSentence(input())
     name = ""
@@ -110,11 +109,13 @@ def continueChat():
         if exitCheck(inStr.lower()):
             print("Very well, I hope I could be of help.")
             break
+        elif inStr.lower() is "yes":
+            print("What would you like to know?")
         else:
             posTagged = posTagSentence(inStr)
             nerTagged = nerTagSentence(posTagged)
             parse_string = ' '.join(str(nerTagged).split())
-            print(findSongToArtistQuery(parse_string))
+            findSongToArtistQuery(parse_string)
             print("Is there anything else I can help you with?")
         
 
