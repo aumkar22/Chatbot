@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 import nltk
@@ -77,16 +77,15 @@ def findSongToArtistQuery(taggedStr):
 
 #Hi and Hello are currently recognised as NNP's
 def initialiseChat():
-    print("Welcome to the ***name*** chatbot. You can ask your music related questions here. Try starting off by saying hello!")
+    print("Hi, I am Name. You can ask anything that has to do with music!")
     time.sleep(.3)
-    inStr = posTagSentence(input())
+    inStr = posTagSentence(str(input()))
     name = ""
     for el in range (0, len(inStr)):
         if inStr[el][1] == 'NNP':
             name = " " + inStr[el][0]
     print ("Hello" + name + ", What would you like to know?")
     continueChat()
-    
 
 
 # In[ ]:
@@ -94,7 +93,7 @@ def initialiseChat():
 
 def continueChat():
     while True:
-        inStr = input()
+        inStr = str(input())
         if exitCheck(inStr.lower()):
             print("Very well, I hope I could be of help.")
             break
