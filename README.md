@@ -1,6 +1,6 @@
 # Chatbot
 
-The **Name** Chatbot is a Python based Music domain chatbot which can be interacted with via Command line. The data set used for answering the queries by Chatbot is the freely available Million Song Dataset which is a collection of audio features and metadata for a million contemporary popular music tracks. For this project, we use a subset of the data set provided at https://tinyurl.com/yb2xu3av. The subset is a collection of 10000 songs randomly sampled from the main data set.
+The **RiffGetter** Chatbot is a Python based Music domain chatbot which can be interacted with via Command line. The data set used for answering the queries by Chatbot is the freely available Million Song Dataset which is a collection of audio features and metadata for a million contemporary popular music tracks. For this project, we use a subset of the data set provided at https://tinyurl.com/yb2xu3av. The subset is a collection of 10000 songs randomly sampled from the main data set.
 
 The data set files provided are in HDF5 format and the project provides scripts to access these files via their Github repository: https://github.com/tbertinmahieux/MSongsDB. We use these files to access the subset to answer the queries asked to the Chatbot. For convenience, we have included the necessary scripts in our repository.
 
@@ -51,6 +51,10 @@ Currently there are two possible queries one might try. The first is to find the
 In detecting the type of query a small set of regular expressions is used. These expressions determine if the users wants to know an artist name or a song tile by looking at the structure of the sentence. The WH-question word and some keywords are taken into account to achieve this. The chatbot assumes the query is entered in proper english. When an expression is matched the string is pruned to only contain song or artist name, which allows it for cheap lookup in the database. This is necessary since iterating over all 10.000 songs once already takes a significant amount of time. 
 
 ## Query Examples
+Examples of working queries:
+![Working Example](https://github.com/aumkar22/Chatbot/blob/master/notebooks/Chatbot_example.PNG)
+
+Examples where the RiffGetter fails:
 ![Fail Image](https://github.com/aumkar22/Chatbot/blob/master/notebooks/CB_fail_Image.png)
 ## Future Improvements
 
