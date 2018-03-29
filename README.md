@@ -40,15 +40,25 @@ The script can then be run as:
 python main.py
 ```
 
+Other module needed to run the Chatbot is the Natural Language Toolkit (nltk) which can be installed as:
+
+```
+conda install nltk
+```
+or
+```
+pip install nltk
+```
+
 ## Goal and Approach
 
 The goal of the chatbot is to do basic interactions and answer some of the basic questions asked, for example, 'Who is the artist of the song Immigrant Song?'
 
 The Chatbot works by extracting a query from the input question using regular expressions. The query is then compared to one attribute of every file in the database, depending on the question. In the example 'Who is the artist of the song Immigrant Song?' the Chatbot will compare the substring 'Immigrant Song' to the song title for every file. When a match is found, the artist's name is returned as ouput on the command line. 
 
-Currently there are two possible queries one might try. The first is to find the artist of a certain song, the second is to find a song by a given artist. The bot allows users to keep asking questions as long as needed. 
+Currently there are three possible queries one might try. The first is to find the artist of a certain song, the second is to find one song by a given artist and the third is to find the most popular song by an artist. The bot allows users to keep asking questions as long as needed. 
 
-In detecting the type of query a small set of regular expressions is used. These expressions determine if the users wants to know an artist name or a song tile by looking at the structure of the sentence. The WH-question word and some keywords are taken into account to achieve this. The chatbot assumes the query is entered in proper english. When an expression is matched the string is pruned to only contain song or artist name, which allows it for cheap lookup in the database. This is necessary since iterating over all 10.000 songs once already takes a significant amount of time. 
+In detecting the type of query a small set of regular expressions is used. These expressions determine if the users wants to know an artist name or a song tile by looking at the structure of the sentence. The WH-question word and some keywords are taken into account to achieve this. The chatbot assumes the query is entered in proper English. When an expression is matched the string is pruned to only contain song or artist name, which allows it for cheap lookup in the database. This is necessary since iterating over all 10000 songs once already takes a significant amount of time. 
 
 ## Query Examples
 **Examples of working queries:**
@@ -56,10 +66,11 @@ In detecting the type of query a small set of regular expressions is used. These
 
 **Examples where the RiffGetter fails:**
 ![Fail Image](https://github.com/aumkar22/Chatbot/blob/master/notebooks/CB_fail_Image.png)
+
 ## Future Improvements
 
 Ideally the Chatbot accesses the full Million Songs Database so it can answer as many queries as possible. The current available resources do not allow this to be done in a reasonable amount of time. With resources like external storage or a better GPU we will be able to provide more and more accurate answers. 
 
-The query extraction is not very robust yet. Another improvement would be to either extend the set of regular expressions, or use different methods like Intention Analysis to extract the query of the user. With this it could also be possible to take things like spelling errors into account. 
+The query extraction is not very robust yet. The Chatbot expects a set of 'WH-' questions or queries containing specific words, so it can lookup the answer in the subset. An extension to the current Chatbot would be to build a Text Classifier for Intention detection so it can provide answers to more 'unseen' queries. This would provide the Chatbot to answer a more broader range of queries also containing spelling errors. 
 
 Finally, it would be nice if the chatbot could handle more query types. Recommended artists or similar songs based on previous input would be a really nice addition for users that want to explore different kinds of music. 
