@@ -36,7 +36,7 @@ def open_h5_file_read(h5filename):
     Open an existing H5 in read mode.
     Same function as in hdf5_utils, here so we avoid one import
     """
-    return tables.openFile(h5filename, mode='r')
+    return tables.open_file(h5filename, mode='r')
 
 
 def get_num_songs(h5):
@@ -128,7 +128,7 @@ def get_song_hotttnesss(h5,songidx=0):
     """
     Get song hotttnesss from a HDF5 song file, by default the first song in it
     """
-    return h5.root.metadata.songs.cols.song_hotttnesss[songidx]
+    return h5.root.metadata.songs.cols.song_hotttnesss[songidx], h5.root.metadata.songs.cols.title[songidx]
 
 def get_title(h5,songidx=0):
     """

@@ -5,9 +5,7 @@
 
 import os
 import sys
-import time
 import glob
-import numpy as np
 
 
 # In[ ]:
@@ -30,17 +28,22 @@ import hdf5_getters as GETTERS
 def apply_to_all_files(ext='.h5'):
     cnt = 0
     # iterate over all files in all subdirectories
-    for root, dirs, files in os.walk(DATA_DIR):
+    h5 = []
+    for root, dirs, files in os.walk(DATA_DIR, topdown = True):
         files = glob.glob(os.path.join(root,'*'+ext))
         # count files
+        #print(root)
+        #print(dirs)
         cnt += len(files)
         # apply function to all files
-        if cnt == 1000:
-            break
-        else:
-            h5 = []
-            for f in files :
-                h5.append(f)
+        #if cnt == 1000:
+            #break
+        #else:
         
+        for f in files:
+            #print(f)
+            h5.append(f)
+        #print(h5)
     return h5
 
+#apply_to_all_files()
