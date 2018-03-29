@@ -27,7 +27,6 @@ def posTagSentence(inStr):
 # In[ ]:
 
 
-#Use this one to keep strings lowercase
 def nerTagSentence(tagList):
     return (nltk.ne_chunk(tagList, binary=True))
 
@@ -43,7 +42,7 @@ def findSongToArtistQuery(taggedStr):
     foundStA = re.search(exStA, taggedStr)
     foundAtS = re.search(exAtS, taggedStr)
     if foundStA is not None:
-        a = re.sub(r'([^\w\s]|[A-Z])', '',taggedStr[found.span()[1]:]).lstrip().rstrip()
+        a = re.sub(r'([^\w\s]|[A-Z])', '',taggedStr[found.span()[1]:]).lstrip().rstrip().title()
         for i in range(len(h5)):
             f = settings.GETTERS.open_h5_file_read(h5[i])
             if settings.GETTERS.get_title(f) is a:
@@ -56,7 +55,7 @@ def findSongToArtistQuery(taggedStr):
                 print("Artist not found")
                 return False
     elif foundAtS is not None:
-        s = re.sub(r'((did|write|sing|make)|[^\w\s]|[A-Z])', '',taggedStr[foundAtS.span()[1]:]).lstrip().rstrip()
+        s = re.sub(r'((did|write|sing|make)|[^\w\s]|[A-Z])', '',taggedStr[foundAtS.span()[1]:]).lstrip().rstrip().title()
         for i in range(len(h5)):
             f = settings.GETTERS.open_h5_file_read(h5[i])
             if settings.GETTERS.get_artist_name(f) is s:
@@ -71,16 +70,6 @@ def findSongToArtistQuery(taggedStr):
     else:
         print("Query not understood")
         return False
-
-
-# In[ ]:
-
-
-# text = "What songs did Queen make?"
-# posTagged = posTagSentence(text)
-# nerTagged = nerTagSentence2(posTagged)
-# parse_string = ' '.join(str(nerTagged).split())
-# print("Found query: ", findSongToArtistQuery(parse_string))
 
 
 # In[ ]:
@@ -109,7 +98,7 @@ def continueChat():
         if exitCheck(inStr.lower()):
             print("Very well, I hope I could be of help.")
             break
-        elif inStr.lower() is "yes":
+        elif inStr.lower() == "yes":
             print("What would you like to know?")
         else:
             posTagged = posTagSentence(inStr)
@@ -117,24 +106,6 @@ def continueChat():
             parse_string = ' '.join(str(nerTagged).split())
             findSongToArtistQuery(parse_string)
             print("Is there anything else I can help you with?")
-        
-
-
-# In[ ]:
-
-
-#Assumes inStr is already POS-tagged
-#Returns the predicate of what the question is about
-def detectQuestions(tagList):
-    start = 0
-    end = len(tagList)
-    for el in range(0, len(tagList)):
-        if tagList[el][1] == 'WP':
-            start = el + 1
-        if tagList[el][1] == '.' and tagList[el][0] == '?':
-            end = el
-    pred = tagList[start:end]
-    return pred
 
 
 # In[ ]:
